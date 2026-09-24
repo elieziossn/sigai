@@ -1,39 +1,9 @@
 package ifrn.sigai.servicoimoveis.repository;
 
 import ifrn.sigai.servicoimoveis.model.Imovel;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public class ImovelRepository {
+public interface ImovelRepository extends JpaRepository<Imovel, Long> {
 
-    private final List<Imovel> imoveis = new CopyOnWriteArrayList<>();
-    private final AtomicLong proximoId = new AtomicLong(1);
-
-    public List<Imovel> findAll() {
-        return imoveis;
-    }
-
-    public Optional<Imovel> findById(Long id) {
-        return imoveis.stream().filter(i -> i.getId().equals(id)).findFirst();
-    }
-
-    public Imovel save(Imovel imovel) {
-        if (imovel.getId() == null) {
-            imovel.setId(proximoId.getAndIncrement());
-            imoveis.add(imovel);
-        } else {
-            deleteById(imovel.getId());
-            imoveis.add(imovel);
-        }
-        return imovel;
-    }
-
-    public void deleteById(Long id) {
-        imoveis.removeIf(i -> i.getId().equals(id));
-    }
 }
