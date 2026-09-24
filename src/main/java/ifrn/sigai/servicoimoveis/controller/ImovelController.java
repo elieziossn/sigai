@@ -38,6 +38,7 @@ public class ImovelController {
         URI uri = URI.create("/imoveis/" + imovel.getId());
         return ResponseEntity.created(uri).body(imovel);
     }
+    
     @PutMapping("/{id}")
     public ResponseEntity<ImovelResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody ImovelRequestDTO imovel) {
         ImovelResponseDTO atualizado = service.atualizar(id, imovel);
