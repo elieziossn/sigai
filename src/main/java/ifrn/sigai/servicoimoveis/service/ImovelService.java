@@ -21,9 +21,17 @@ public class ImovelService {
         Imovel salvo = repository.save(toEntity(dto));
         return toResponseDTO(salvo);
     }
-    public List<Imovel> listar() {
-        return repository.findAll();
-    }  
+    public List<Imovel> listar(String endereco, Double valorMaximo) {
+        if (endereco != null && valorMaximo != null) {
+            return repository.findByEnderecoContainingIgnoreCaseAndValorAluguelLessThanEqual(endereco, valorMaximo);
+        } else if (endereco != null) {
+            return repository.findByEnderecoContainingIgnoreCase(endereco);
+        } else if (valorMaximo != null) {
+            return repository.findByValorAluguelLessThanEqual(valorMaximo);
+        } else {
+            return repository.findAll();
+        }
+    }
     public ImovelResponseDTO buscarPorId(Long id) {
         Imovel imovel = repository.findById(id)
             .orElseThrow(() -> new ImovelNaoEncontradoException(id));

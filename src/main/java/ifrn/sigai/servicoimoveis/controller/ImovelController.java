@@ -2,9 +2,7 @@ package ifrn.sigai.servicoimoveis.controller;
 
 import ifrn.sigai.servicoimoveis.dto.ImovelRequestDTO;
 import ifrn.sigai.servicoimoveis.dto.ImovelResponseDTO;
-import ifrn.sigai.servicoimoveis.exception.ImovelNaoEncontradoException;
 import ifrn.sigai.servicoimoveis.model.Imovel;
-import ifrn.sigai.servicoimoveis.repository.ImovelRepository;
 import ifrn.sigai.servicoimoveis.service.ImovelService;
 import jakarta.validation.Valid;
 
@@ -25,8 +23,8 @@ public class ImovelController {
         this.service = service;
     }
     @GetMapping
-    public List<Imovel> listar() {
-        return service.listar();
+    public List<Imovel> listar(@RequestParam (required = false) String endereco, @RequestParam(required = false) Double valorMaximo) {
+        return service.listar(endereco, valorMaximo);
     }
     @GetMapping("/{id}")
     public ImovelResponseDTO buscarPorId(@PathVariable Long id) {
