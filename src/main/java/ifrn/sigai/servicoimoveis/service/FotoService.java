@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import ifrn.sigai.servicoimoveis.dto.FotoRequestDTO;
 import ifrn.sigai.servicoimoveis.dto.FotoResponseDTO;
+import ifrn.sigai.servicoimoveis.exception.FotoNaoEncontradaException;
 import ifrn.sigai.servicoimoveis.model.Foto;
 import ifrn.sigai.servicoimoveis.repository.FotoRepository;
 
@@ -22,12 +23,12 @@ public class FotoService {
     }
     public FotoResponseDTO buscarPorId(Long id) {
         Foto foto = repository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Foto não encontrada com id: " + id));
+            .orElseThrow(() -> new FotoNaoEncontradaException(id));
         return toResponseDTO(foto);
     }
     public FotoResponseDTO atualizar(Long id, FotoRequestDTO dto) {
         Foto foto = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Foto não encontrada com id: " + id));
+                .orElseThrow(() -> new FotoNaoEncontradaException(id));
 
         Foto fotoAtualizada = toEntity(dto);
         fotoAtualizada.setId(id);
@@ -37,7 +38,7 @@ public class FotoService {
     }
     public void deletar(Long id) {
         Foto foto = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Foto não encontrada com id: " + id));
+                .orElseThrow(() -> new FotoNaoEncontradaException(id));
         repository.deleteById(id);
     }
     public List<FotoResponseDTO> listar() {
