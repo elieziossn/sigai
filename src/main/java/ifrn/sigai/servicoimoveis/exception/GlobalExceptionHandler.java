@@ -33,9 +33,18 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus (HttpStatus.NOT_FOUND)
     @ExceptionHandler(ImovelNaoEncontradoException.class)
-    public ProblemDetail handleNaoEncontrado(ImovelNaoEncontradoException ex) {
+    public ProblemDetail handleImovelNaoEncontrado(ImovelNaoEncontradoException ex) {
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
         pd.setTitle("Imóvel não encontrado");
+        pd.setDetail(ex.getMessage());
+        return pd;
+    }
+
+    @ResponseStatus (HttpStatus.NOT_FOUND)
+    @ExceptionHandler(FotoNaoEncontradaException.class)
+    public ProblemDetail handleFotoNaoEncontrada(FotoNaoEncontradaException ex) {
+        ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        pd.setTitle("Foto não encontrada");
         pd.setDetail(ex.getMessage());
         return pd;
     }
