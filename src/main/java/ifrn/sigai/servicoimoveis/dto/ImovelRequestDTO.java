@@ -8,8 +8,10 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Data 
-@NoArgsConstructor 
 public class ImovelRequestDTO {
+
+    public ImovelRequestDTO() {
+    }   
 
     public ImovelRequestDTO(String endereco, Double valorAluguel, String descricao) {
         this.endereco = endereco;

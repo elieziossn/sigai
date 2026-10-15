@@ -4,12 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data 
-@NoArgsConstructor 
-
 public class FotoRequestDTO {
+
+    public FotoRequestDTO() {
+    }   
     
     public FotoRequestDTO(Long imovelId, String url, String legenda, Boolean principal) {
         this.imovelId = imovelId;

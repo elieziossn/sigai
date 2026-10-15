@@ -4,9 +4,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data  
-@NoArgsConstructor 
 public class ImovelResponseDTO {
 
+    public ImovelResponseDTO() {
+    }   
     public ImovelResponseDTO(Long id, String endereco, Double valorAluguel) {
         this.id = id;
         this.endereco = endereco;
