@@ -1,5 +1,6 @@
 package ifrn.sigai.servicoimoveis.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -32,8 +33,10 @@ public class ImovelService {
         } else {
             imoveis = repository.findAll();
         }
+
         return imoveis.stream().map(this::toResponseDTO).toList();
     }
+    
     public ImovelResponseDTO buscarPorId(Long id) {
         Imovel imovel = repository.findById(id)
             .orElseThrow(() -> new ImovelNaoEncontradoException(id));

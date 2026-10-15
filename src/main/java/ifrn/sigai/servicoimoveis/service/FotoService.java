@@ -61,6 +61,9 @@ public class FotoService {
         return new Foto(null,imovel, dto.getUrl(), dto.getLegenda(), dto.getPrincipal());
     }
     private FotoResponseDTO toResponseDTO(Foto foto) {
-        return new FotoResponseDTO(foto.getId(), foto.getImovel().getId(), foto.getUrl(), foto.getLegenda(), foto.getPrincipal());
+        Imovel imovel = foto.getImovel();
+        long idimovel = imovel.getId();
+        return new FotoResponseDTO(foto.getId(), idimovel, foto.getUrl(), foto.getLegenda(), foto.getPrincipal());
+        //return new FotoResponseDTO(foto.getId(), foto.getImovel().getId(), foto.getUrl(), foto.getLegenda(), foto.getPrincipal());
     }
 }

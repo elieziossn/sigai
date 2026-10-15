@@ -3,14 +3,21 @@ package ifrn.sigai.servicoimoveis.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data 
 @NoArgsConstructor 
-@AllArgsConstructor 
+
 public class FotoRequestDTO {
+    
+    public FotoRequestDTO(Long imovelId, String url, String legenda, Boolean principal) {
+        this.imovelId = imovelId;
+        this.url = url;
+        this.legenda = legenda;
+        this.principal = principal;
+    }
+
     @NotNull(message = "O ID do imóvel não pode ser nulo ou vazio.")
     private Long imovelId;
 
