@@ -21,16 +21,18 @@ public class ImovelService {
         Imovel salvo = repository.save(toEntity(dto));
         return toResponseDTO(salvo);
     }
-    public List<Imovel> listar(String endereco, Double valorMaximo) {
+    public List<ImovelResponseDTO> listar(String endereco, Double valorMaximo) {
+        List<Imovel> imoveis;
         if (endereco != null && valorMaximo != null) {
-            return repository.findByEnderecoContainingIgnoreCaseAndValorAluguelLessThanEqual(endereco, valorMaximo);
+            imoveis = repository.findByEnderecoContainingIgnoreCaseAndValorAluguelLessThanEqual(endereco, valorMaximo);
         } else if (endereco != null) {
-            return repository.findByEnderecoContainingIgnoreCase(endereco);
+            imoveis = repository.findByEnderecoContainingIgnoreCase(endereco);
         } else if (valorMaximo != null) {
-            return repository.findByValorAluguelLessThanEqual(valorMaximo);
+            imoveis = repository.findByValorAluguelLessThanEqual(valorMaximo);
         } else {
-            return repository.findAll();
+            imoveis = repository.findAll();
         }
+        return imoveis.stream().map(this::toResponseDTO).toList();
     }
     public ImovelResponseDTO buscarPorId(Long id) {
         Imovel imovel = repository.findById(id)
@@ -49,7 +51,7 @@ public class ImovelService {
         return toResponseDTO(atualizado);
     }
     public void deletar(Long id) {
-        Imovel imovel = repository.findById(id)
+        repository.findById(id)
                 .orElseThrow(() -> new ImovelNaoEncontradoException(id));
         repository.deleteById(id);
     }

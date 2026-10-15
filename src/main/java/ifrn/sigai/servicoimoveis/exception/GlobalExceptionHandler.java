@@ -3,7 +3,6 @@ package ifrn.sigai.servicoimoveis.exception;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jspecify.annotations.Nullable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.validation.FieldError;

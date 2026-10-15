@@ -7,15 +7,21 @@ import org.springframework.stereotype.Service;
 import ifrn.sigai.servicoimoveis.dto.FotoRequestDTO;
 import ifrn.sigai.servicoimoveis.dto.FotoResponseDTO;
 import ifrn.sigai.servicoimoveis.exception.FotoNaoEncontradaException;
+import ifrn.sigai.servicoimoveis.exception.ImovelNaoEncontradoException;
 import ifrn.sigai.servicoimoveis.model.Foto;
+import ifrn.sigai.servicoimoveis.model.Imovel;
 import ifrn.sigai.servicoimoveis.repository.FotoRepository;
+import ifrn.sigai.servicoimoveis.repository.ImovelRepository;
 
 @Service 
 public class FotoService {
 
     private final FotoRepository repository;
-    public FotoService(FotoRepository repository) {
+    private final ImovelRepository imovelRepository;
+
+    public FotoService(FotoRepository repository, ImovelRepository imovelRepository) {
         this.repository = repository;
+        this.imovelRepository = imovelRepository;
     }
     public FotoResponseDTO criar(FotoRequestDTO dto) {
         Foto salvo = repository.save(toEntity(dto));
@@ -27,7 +33,7 @@ public class FotoService {
         return toResponseDTO(foto);
     }
     public FotoResponseDTO atualizar(Long id, FotoRequestDTO dto) {
-        Foto foto = repository.findById(id)
+        repository.findById(id)
                 .orElseThrow(() -> new FotoNaoEncontradaException(id));
 
         Foto fotoAtualizada = toEntity(dto);
@@ -37,7 +43,7 @@ public class FotoService {
         return toResponseDTO(fotoAtualizada);
     }
     public void deletar(Long id) {
-        Foto foto = repository.findById(id)
+        repository.findById(id)
                 .orElseThrow(() -> new FotoNaoEncontradaException(id));
         repository.deleteById(id);
     }
@@ -50,9 +56,11 @@ public class FotoService {
 
 
     private Foto toEntity(FotoRequestDTO dto) {
-        return new Foto(null, dto.getImovelId(), dto.getUrl(), dto.getLegenda(), dto.getPrincipal());
+        Imovel imovel = imovelRepository.findById(dto.getImovelId())
+            .orElseThrow(() -> new ImovelNaoEncontradoException(dto.getImovelId()));
+        return new Foto(null,imovel, dto.getUrl(), dto.getLegenda(), dto.getPrincipal());
     }
     private FotoResponseDTO toResponseDTO(Foto foto) {
-        return new FotoResponseDTO(foto.getId(), foto.getImovelId(), foto.getUrl(), foto.getLegenda(), foto.getPrincipal());
+        return new FotoResponseDTO(foto.getId(), foto.getImovel().getId(), foto.getUrl(), foto.getLegenda(), foto.getPrincipal());
     }
 }
