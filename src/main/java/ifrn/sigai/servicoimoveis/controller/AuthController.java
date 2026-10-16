@@ -35,7 +35,7 @@ public class AuthController {
         UserDetails user = userDetailsService.loadUserByUsername(dto.getUsername());
         String role = user.getAuthorities().iterator().next().getAuthority();
         String token = jwtService.gerarToken(dto.getUsername(), role);
-        return ResponseEntity.ok(new TokenResponseDTO(token, token.startsWith("Bearer ") ? "Bearer" : "JWT"));
+        return ResponseEntity.ok(new TokenResponseDTO(token, "Bearer"));
     }
 }
 
