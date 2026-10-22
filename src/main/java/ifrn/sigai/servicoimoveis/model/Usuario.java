@@ -28,7 +28,7 @@ public class Usuario implements UserDetails {
     public Usuario() {
     }
 
-    public Usuario(String username, String password, String role) {
+    public Usuario(String username, String password, Role role) {
         this.username = username;
         this.password = password;
         this.role = role;
