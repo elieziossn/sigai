@@ -25,21 +25,13 @@ public class DataSeeder implements CommandLineRunner {
             return; // se já tem usuário, não duplica
         }
 
-        Usuario admin = new Usuario();
-        admin.setUsername("admin");
-        admin.setPassword(passwordEncoder.encode("admin123"));
-        admin.setRole(Role.ADMIN);
+        Usuario admin = new Usuario("admin", passwordEncoder.encode("admin123"), Role.ADMIN);
         usuarioRepository.save(admin);
 
-        Usuario corretor = new Usuario();
-        corretor.setUsername("corretor");
-        corretor.setPassword(passwordEncoder.encode("corretor123"));
-        corretor.setRole(Role.CORRETOR);
+        Usuario corretor = new Usuario("corretor", passwordEncoder.encode("corretor123"), Role.CORRETOR);
         usuarioRepository.save(corretor);
 
-        Usuario cliente = new Usuario();
-        cliente.setUsername("cliente");
-        cliente.setPassword(passwordEncoder.encode("cliente123"));
+        Usuario cliente = new Usuario("cliente", passwordEncoder.encode("cliente123"), Role.CLIENTE);
         cliente.setRole(Role.CLIENTE);
         usuarioRepository.save(cliente);
 

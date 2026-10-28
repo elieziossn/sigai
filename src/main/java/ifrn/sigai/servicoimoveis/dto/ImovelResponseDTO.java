@@ -1,7 +1,6 @@
 package ifrn.sigai.servicoimoveis.dto;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data  
 public class ImovelResponseDTO {
