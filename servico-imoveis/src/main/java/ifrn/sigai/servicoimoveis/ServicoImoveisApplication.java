@@ -1,13 +1,13 @@
-package ifrn.sigai;
+package ifrn.sigai.servicoimoveis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SigaiApplication {
+public class ServicoImoveisApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SigaiApplication.class, args);
+		SpringApplication.run(ServicoImoveisApplication.class, args);
 	}
 
 }

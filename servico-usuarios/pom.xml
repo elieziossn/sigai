@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ifrn</groupId>
-	<artifactId>sigai</artifactId>
+	<artifactId>servico-usuarios</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sigai</name>
+	<name>servico-usuarios</name>
 	<description/>
 	<url/>
 	<licenses>
